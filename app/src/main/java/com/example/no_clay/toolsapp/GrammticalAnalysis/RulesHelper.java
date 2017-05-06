@@ -36,13 +36,31 @@ public class RulesHelper {
         vN = new HashSet<>();
         firstInited = false;
         followInited = false;
-        initRules(ruleArray);
-        initStartSignal();
+        //在这里进行测试代码
+        EliminateLeftRecursion tool = new EliminateLeftRecursion(ruleArray);
+        rules.addAll(tool.getRuleList());
+        startSignal = tool.getStartSignal();
+//        initRules(ruleArray);
+//        initStartSignal();
         initVTAndVN();
         initFirstAndFollow();
     }
 
-
+    public Set<String> getFirstOfRight(Rule rule){
+        List<String> rights = rule.getRights();
+        Set<String> result = new HashSet<>();
+        for (int i = 0; i < rights.size(); i++) {
+            if (i == 0 && vT.contains(rights.get(0))){
+                //第一个是非终结符
+                return firsts.get(rights.get(0));
+            }
+            result.addAll(firsts.get(rights.get(i)));
+            if (!firsts.get(rights.get(i)).contains("$")){
+                return result;
+            }
+        }
+        return result;
+    }
     /**
      * 1.对于文法G的每个产生式A->α都执行第2步和第3步
      * 2.对每个终结符a属于First(α),把A->α加到M[A,a]中
@@ -73,7 +91,7 @@ public class RulesHelper {
         }
         for (int i = 0; i < rules.size(); i++) {
             Rule rule = rules.get(i);
-            Set<String> right = firsts.get(rule.getRights().get(0));
+            Set<String> right = getFirstOfRight(rule);
             int x;
             int y;
             if (right.contains("$")){
@@ -176,6 +194,7 @@ public class RulesHelper {
             }
         }
     }
+
 
     /**
      * 初始化完毕后就返回false

@@ -9,9 +9,11 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.no_clay.toolsapp.R;
 import com.example.no_clay.toolsapp.GrammticalAnalysis.HtmlBuilder;
 import com.example.no_clay.toolsapp.GrammticalAnalysis.LL1Resolver;
+import com.example.no_clay.toolsapp.GrammticalAnalysis.RuleTreeHelper;
+import com.example.no_clay.toolsapp.GrammticalAnalysis.RuleTreeNode;
+import com.example.no_clay.toolsapp.R;
 
 import java.util.Arrays;
 
@@ -89,23 +91,25 @@ public class RightFragmentGrammaticalAnalysis extends ReFreshFragment implements
                         break;
                     }
                     case GRAMMATICAL_ANALYSIS:{
-                        if (mResolver.doResolverAtOnce() == LL1Resolver.JUST_DOING){
+                        int flag = mResolver.doResolverAtOnce();
+                        if (flag == LL1Resolver.JUST_DOING){
                             mNext.setText("正在进行语法分析，点击进行下一步");
-                        }else if (mResolver.doResolverAtOnce() == LL1Resolver.SUCCESS){
+                        }else if (flag == LL1Resolver.SUCCESS){
                             state ++;
                             mNext.setText("语法分析完成，点击进行下一步");
-                        }else{
+                        }else if (flag == LL1Resolver.FAILED){
                             mNext.setText("语法分析失败");
                         }
                         break;
                     }
                     case GENERATE_GRAMMATICAL_TREE:{
-                        state ++;
                         mNext.setText("语法树生成完毕");
+                        Toast.makeText(getContext(), "请不要点击，语法分析已经完成了", Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    default:Toast.makeText(getContext(), "请不要点击，语法分析已经完成了", Toast.LENGTH_SHORT).show();
+                    default:{
 
+                    }
                 }
                 showInHtml();
                 break;
@@ -159,6 +163,11 @@ public class RightFragmentGrammaticalAnalysis extends ReFreshFragment implements
                 break;
             }
             case GENERATE_GRAMMATICAL_TREE:{
+                builder.appendTitleAndContent("输入的句子：", input);
+                builder.appendTitleAndContent("构成语法树：", "");
+                RuleTreeHelper helper = new RuleTreeHelper(mResolver.getStepRuleList(), mResolver);
+                RuleTreeNode root = helper.constructRuleTree();
+                builder.appendHtml(helper.getSon(root));
                 break;
             }
         }

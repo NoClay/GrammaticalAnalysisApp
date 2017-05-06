@@ -5,8 +5,7 @@ package com.example.no_clay.toolsapp.GrammticalAnalysis;
  */
 
 public class HtmlBuilder {
-    private static final String HEAD = "" +
-            "<!doctype html>\n" +
+    private static final String HEAD = "<!doctype html>\n" +
             "<html>\n" +
             "<head>\n" +
             "<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>\n" +
@@ -207,7 +206,22 @@ public class HtmlBuilder {
             ".on-focus-mode blockquote { border-left-color: rgba(85, 85, 85, 0.117647); }\n" +
             "header, .context-menu, .megamenu-content, footer { font-family: \"Segoe UI\", Arial, sans-serif; }\n" +
             "\n" +
+            "tree {\n" +
+            " list-style-type: none;\n" +
+            " background: url(images/vline.png) repeat-y;\n" +
+            " margin-left:20px\n" +
+            " padding: 0;\n" +
+            "}\n" +
             "\n" +
+            "li {\n" +
+//            " list-style-type:none;\n" +
+            " margin: 0;\n" +
+            " padding: 0 12px;\n" +
+            " line-height: 20px;\n" +
+            " background: url(images/node.png) no-repeat;\n" +
+            " color: #369;\n" +
+            " font-weight: bold;\n" +
+            "}\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -269,6 +283,11 @@ public class HtmlBuilder {
             mBuilder.append("</tr>");
         }
         mBuilder.append("</tbody></table>");
+    }
+
+
+    public void appendHtml(String sonString){
+        mBuilder.append(sonString);
     }
 
     public String toHtml(){

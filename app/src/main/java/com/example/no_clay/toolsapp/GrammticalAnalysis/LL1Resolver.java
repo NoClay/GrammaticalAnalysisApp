@@ -24,19 +24,21 @@ public class LL1Resolver {
     private int state = JUST_DOING;
     //第一行为分析的数据之后为测试的数据
     public LL1Resolver(String data) {
-        String[] datas = data.split("#");
-        if (datas.length == 2){
-            this.data = datas[0] + "#";
-            rulesHelper = new RulesHelper(datas[1].split("\n"));
-            rulesHelper.createFirstAndFollow();
-            rulesHelper.initForecastMatrix();
-            resolverStack = new Stack<>();
-            resolverStack.push("#");
-            resolverStack.push(rulesHelper.getStartSignal());
-            steps = new ArrayList<>();
-            steps.add(new Step(Arrays.toString(resolverStack.toArray()),
-                    datas[0], null));
+        String[] datas = data.split("\n");
+        this.data = datas[0];
+        String[] rules = new String[datas.length - 1];
+        for (int i = 1; i < datas.length; i++) {
+            rules[i - 1] = datas[i];
         }
+        rulesHelper = new RulesHelper(rules);
+        rulesHelper.createFirstAndFollow();
+        rulesHelper.initForecastMatrix();
+        resolverStack = new Stack<>();
+        resolverStack.push("#");
+        resolverStack.push(rulesHelper.getStartSignal());
+        steps = new ArrayList<>();
+        steps.add(new Step(Arrays.toString(resolverStack.toArray()),
+                datas[0], null));
     }
     public int doResolverAtOnce(){
         if (steps == null){
@@ -75,7 +77,7 @@ public class LL1Resolver {
                         null));
                 state = FAILED;
                 return state;
-            }else{
+            }else {
                 Object[] rights = next.getRights().toArray();
                 resolverStack.pop();
                 for (int i = rights.length - 1; i >= 0; i--) {
@@ -155,5 +157,15 @@ public class LL1Resolver {
         public Rule getRule() {
             return mRule;
         }
+    }
+
+    public List<Rule> getStepRuleList(){
+        List<Rule> rules = new ArrayList<>();
+        for (int i = 0; i < steps.size(); i++) {
+            if (steps.get(i).getRule() != null){
+                rules.add(steps.get(i).getRule());
+            }
+        }
+        return rules;
     }
 }
