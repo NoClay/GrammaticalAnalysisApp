@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_analysis"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    tools:context="com.example.no_clay.toolsapp.Activitys.AnalysisActivity">
+    <fragment
+        android:id="@+id/left_fragment"
+        android:name="com.example.no_clay.toolsapp.Fragments.LeftFragmentForAnalysis"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+    </fragment>
+    <fragment
+        android:id="@+id/right_fragment"
+        android:name="com.example.no_clay.toolsapp.Fragments.RightFragmentGrammaticalAnalysis"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7">
+    </fragment>
+</LinearLayout>
