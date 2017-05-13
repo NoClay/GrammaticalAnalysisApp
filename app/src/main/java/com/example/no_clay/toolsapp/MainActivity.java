@@ -2,6 +2,7 @@ package com.example.no_clay.toolsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -99,5 +100,7 @@ public class MainActivity extends AppCompatActivity
         mToolBar = (Toolbar) findViewById(R.id.toolBar);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mActivityMain = (LinearLayout) findViewById(R.id.activity_main);
+
     }
+
 }

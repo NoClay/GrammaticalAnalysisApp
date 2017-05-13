@@ -11,4 +11,15 @@
     <color name="lightBlue">#2194F8</color>
     <color name="darkGray">#D5D5D5</color>
     <color name="black">#000000</color>
+    <color name="color0">#000000</color>
+    <color name="color1">#AC084F</color>
+    <color name="color2">#DF1620</color>
+    <color name="color3">#D26E19</color>
+    <color name="color4">#C3A215</color>
+    <color name="color5">#C3DB0B</color>
+    <color name="color6">#45BE31</color>
+    <color name="color7">#254B9C</color>
+    <color name="color8">#26925E</color>
+    <color name="color9">#707070</color>
+
 </resources>

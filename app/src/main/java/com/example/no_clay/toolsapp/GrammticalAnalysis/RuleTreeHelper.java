@@ -97,4 +97,9 @@ public class RuleTreeHelper {
                 "</html>");
         return builder.toString();
     }
+
+
+    public void getElementTree(){
+
+    }
 }

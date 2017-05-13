@@ -6,11 +6,17 @@ import java.util.*;
  * Created by nocla on 2017/5/2.
  */
 public class Rule {
+    //规则的值，如A->aP
     String value;
+    //规则左部，如A
     String left;
+    //规则右部，如aP
     String right;
+    //->的位置
     int pos;
+    //右部的符号序列，如a, P
     List<String> rights;
+    //规则右部的非终结符和终结符集
     Set<String> vT;
     Set<String> vN;
 

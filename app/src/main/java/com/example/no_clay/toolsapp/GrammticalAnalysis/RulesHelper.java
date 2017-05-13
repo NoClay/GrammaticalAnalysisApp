@@ -17,13 +17,13 @@ public class RulesHelper {
     public Map<String, Set<String>> follows;
     //终结符
     public Set<String> vT = new HashSet<>();
-    //非中介符
+    //非终结符
     public Set<String> vN = new HashSet<>();
     public List<Rule> rules;
     public String startSignal;
+    public String[][]forecastMatrix;
     public boolean firstInited = false;
     public boolean followInited = false;
-    public String[][]forecastMatrix;
     public static final String ERROR = "ERROR";
     public Map<String, Integer> cols;
     public Map<String, Integer> rows;
